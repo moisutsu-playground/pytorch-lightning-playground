@@ -1,0 +1,1 @@
+from .bert_for_sentence_classification import BertForSentenceClassification

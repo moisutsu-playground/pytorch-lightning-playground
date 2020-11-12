@@ -8,6 +8,9 @@ def split_data(input_path: str, output_dir: str):
     with open(input_path) as f:
         data.extend(f.readlines())
 
+    # tmp
+    data = data[:40]
+
     random.shuffle(data)
 
     data_length = len(data)
@@ -15,7 +18,7 @@ def split_data(input_path: str, output_dir: str):
     with (Path(output_dir) / "train.tsv").open("w") as f:
         f.writelines(data[:int(data_length / 10 * 8)])
 
-    with (Path(output_dir) / "dev.tsv").open("w") as f:
+    with (Path(output_dir) / "val.tsv").open("w") as f:
         f.writelines(data[int(data_length / 10 * 8):int(data_length / 10 * 9)])
 
     with (Path(output_dir) / "test.tsv").open("w") as f:
