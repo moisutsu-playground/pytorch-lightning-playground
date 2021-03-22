@@ -1,12 +1,17 @@
 from torch import nn
 from transformers import BertModel
 
+
 class BertForSentenceClassification(nn.Module):
+    BERT_EMBEDDINGS_DIM = 768
+
     def __init__(self, label_dim: int):
         super().__init__()
         self.label_dim = label_dim
-        self.bert = BertModel.from_pretrained("cl-tohoku/bert-base-japanese-whole-word-masking")
-        self.cls2label = nn.Linear(768, label_dim)
+        self.bert = BertModel.from_pretrained(
+            "cl-tohoku/bert-base-japanese-whole-word-masking"
+        )
+        self.cls2label = nn.Linear(self.BERT_EMBEDDINGS_DIM, label_dim)
         self.criterion = nn.CrossEntropyLoss()
 
     @staticmethod
